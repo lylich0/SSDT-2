@@ -1,0 +1,248 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "lab 1"
+  },
+  "tags": [
+    {
+      "name": "Requests",
+      "description": "Test API"
+    }
+  ],
+
+"servers": [
+        {
+        "url": "/"
+        }
+    ],
+
+
+ "components": {
+        "schemas": {
+            "user": {
+                "properties": {
+                    "id": {
+                    "type": "integer"
+                    },
+                    "name": {
+                    "type": "string"
+                    }
+                }
+            },
+            "category":{
+                "properties": {
+                    "id": {
+                    "type": "integer"
+                    },
+                    "name": {
+                    "type": "string"
+                    }
+                }
+        },
+            "record":{
+                "properties": {
+                    "id": {
+                    "type": "integer"
+                    },
+                    "user id": {
+                    "type": "integer"
+                    },
+                    "category id": {
+                    "type": "integer"
+                    },
+                    "date": {
+                    "type": "string"
+                    },
+                    "amount": {
+                    "type": "string"
+                    }
+                }
+            },
+            "record by user":{
+                "properties": {
+                    "user id": {
+                    "type": "integer"
+                    }
+                }
+        },
+            "record by category":{
+                "properties": {
+                    "user id": {
+                    "type": "integer"
+                    },
+                    "category id": {
+                    "type": "integer"
+                    }
+                }
+        }
+        }
+    },
+
+
+"paths": {
+        "/user": {
+            "post": {
+            "tags": [
+                "Create user"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/user"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK"
+                },
+                "404": {
+                    "description": "NOT FOUND"
+                }
+            }
+            }
+        },
+
+        "/category": {
+            "post": {
+            "tags": [
+                "Create category"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/category"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK"
+                },
+                "404": {
+                    "description": "NOT FOUND"
+                }
+            }
+            }
+        },
+        "/record": {
+            "post": {
+            "tags": [
+                "Create record"
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/record"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK"
+                },
+                "404": {
+                    "description": "NOT FOUND"
+                }
+            }
+            }
+        },
+        "/categories": {
+            "get" :{
+                "tags": [
+                    "Get categories"
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/records/user/{uid}": {
+            "get" :{
+                "tags": [
+                    "Get record by user"
+                ],
+                "parameters": [{
+                  "name": "uid",
+                  "in": "path",
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/record by user"
+                        }
+                }}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        },
+        "/records/user/{uid}/{cid}": {
+            "get" :{
+                "tags": [
+                    "Get record by category"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/record by category"
+                                }
+                            }
+                        }
+                    },
+                    {
+                       "name": "cid",
+                        "in": "path",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/record by category"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        }
+}
+}
+
+
+
+
